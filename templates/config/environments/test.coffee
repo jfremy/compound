@@ -2,7 +2,8 @@ express = require 'express'
 
 module.exports = (compound) ->
   app = compound.app
-  app.configure 'test', ->
+  env = process.env.NODE_ENV || 'development';
+  if env == 'test'
     app.enable 'quiet'
     app.enable 'view cache'
     app.enable 'model cache'

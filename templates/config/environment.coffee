@@ -1,20 +1,27 @@
 module.exports = (compound) ->
 
   express = require 'express'
+  methodOverride = require 'method-override'
+  session = require 'express-session'
+  bodyParser = require 'body-parser'
+  cookieParser = require 'cookie-parser'
   app = compound.app
 
-  app.configure ->
-    app.enable 'coffee'
+  app.enable 'coffee'
 
-    app.set 'cssEngine', '{{ CSSENGINE }}'
-    compound.loadConfigs __dirname
+  app.set 'cssEngine', '{{ CSSENGINE }}'
+  compound.loadConfigs __dirname
 
-    # make sure you run `npm install railway-routes browserify`
-    # app.enable 'clientside'
-    app.use express.static(app.root + '/public', maxAge: 86400000)
-    app.use express.urlencoded()
-    app.use express.json()
-    app.use express.cookieParser 'secret'
-    app.use express.session secret: 'secret'
-    app.use express.methodOverride()
-    app.use app.router
+  # make sure you run `npm install railway-routes browserify`
+  # app.enable 'clientside'
+  app.use express.static(app.root + '/public', maxAge: 86400000)
+  app.use bodyParser.urlencoded()
+  app.use bodyParser.json()
+  app.use cookieParser 'secret'
+  app.use session secret: 'secret'
+  app.use methodOverride (req, res) ->
+    if req.body && typeof req.body == 'object' && '_method' in req.body
+      method = req.body._method
+      delete req.body._method
+      return method
+  app.use app.router

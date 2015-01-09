@@ -2,7 +2,9 @@ express = require 'express'
 
 module.exports = (compound) ->
   app = compound.app
-  app.configure 'development', ->
+
+  env = process.env.NODE_ENV || 'development'
+  if env == 'development'
     app.enable 'watch'
     app.enable 'log actions'
     app.enable 'env info'
