@@ -99,7 +99,7 @@ describe('Generators API', function() {
         var package = path.normalize(__dirname + '/../package.json');
         delete memfs[package];
         compound.generators.perform('init', ['--db', 'mongodb']);
-        memfs[package].should.include('jugglingdb-mongodb');
+        memfs[package].should.containEql('jugglingdb-mongodb');
     });
 });
 

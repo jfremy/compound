@@ -51,8 +51,8 @@
     "semicov": "*",
     "marked": ">= 0.2.6",
     "express": "4.x",
-    "should": "1.2.2",
-    "mocha": "1.8.1"
+    "should": "4.4.4",
+    "mocha": "2.1.0"
   },
   "scripts": {
     "test": "make test",
