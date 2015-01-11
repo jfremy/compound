@@ -15,11 +15,11 @@ module.exports = (compound) ->
   # make sure you run `npm install railway-routes browserify`
   # app.enable 'clientside'
   app.use express.static(app.root + '/public', maxAge: 86400000)
-  app.use bodyParser.urlencoded()
+  app.use bodyParser.urlencoded extended: true
   app.use bodyParser.json()
   app.use cookieParser 'secret'
-  app.use session secret: 'secret'
-  app.use methodOverride (req, res) ->
+  app.use session {secret: 'secret', resave: false, saveUninitialized: true}
+  app.use methodOverride (req) ->
     if req.body && typeof req.body == 'object' && '_method' in req.body
       method = req.body._method
       delete req.body._method

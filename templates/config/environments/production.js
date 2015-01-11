@@ -1,6 +1,7 @@
 var express = require('express');
 
 module.exports = function (compound) {
+    var errorHandler = require("errorhandler");
     var app = compound.app;
 
     var env = process.env.NODE_ENV || 'development';
@@ -9,6 +10,6 @@ module.exports = function (compound) {
         app.enable('merge javascripts');
         app.enable('merge stylesheets');
         app.disable('assets timestamps');
-        app.use(express.errorHandler());
+        app.use(errorHandler());
     }
 };

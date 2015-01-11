@@ -12,11 +12,11 @@ module.exports = function (compound) {
     app.set('cssDirectory', '/stylesheets/');
     app.set('cssEngine', '{{ CSSENGINE }}');
     compound.loadConfigs(__dirname);
-    app.use(bodyParser.urlencoded());
+    app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
     app.use(cookieParser('secret'));
-    app.use(session({secret: 'secret'}));
-    app.use(methodOverride(function(req, res){
+    app.use(session({secret: 'secret', resave: false, saveUninitialized: true }));
+    app.use(methodOverride(function(req){
         if (req.body && typeof req.body === 'object' && '_method' in req.body) {
             // look in urlencoded POST bodies and delete it
             var method = req.body._method;

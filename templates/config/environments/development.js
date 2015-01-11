@@ -1,6 +1,7 @@
 var express = require('express');
 
 module.exports = function (compound) {
+    var errorHandler = require("errorhandler");
     var app = compound.app;
 
     var env = process.env.NODE_ENV || 'development';
@@ -10,6 +11,6 @@ module.exports = function (compound) {
         app.enable('env info');
         app.enable('force assets compilation');
         app.set('translationMissing', 'display');
-        app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-    };
+        app.use(errorHandler({ dumpExceptions: true, showStack: true }));
+    }
 };

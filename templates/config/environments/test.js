@@ -1,6 +1,7 @@
 var express = require('express');
 
 module.exports = function (compound) {
+    var errorHandler = require("errorhandler");
     var app = compound.app;
 
     var env = process.env.NODE_ENV || 'development';
@@ -9,6 +10,6 @@ module.exports = function (compound) {
         app.enable('view cache');
         app.enable('model cache');
         app.enable('eval cache');
-        app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+        app.use(errorHandler({ dumpExceptions: true, showStack: true }));
     }
 };
