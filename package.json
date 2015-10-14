@@ -48,7 +48,7 @@
   "devDependencies": {
     "jugglingdb": ">= 0.1.25",
     "nodeunit": "latest",
-    "semicov": "*",
+    "semicov": ">=0.1.1",
     "marked": ">= 0.2.6",
     "express": "4.x",
     "should": "4.4.4",
